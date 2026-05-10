@@ -1,56 +1,55 @@
-#pragma once
-#include <cstddef>
 #include <stdexcept>
+#include <iostream>
 
-template <typename T>
 class Vector
 {
 private:
-    std::size_t m_size;
-    std::size_t m_capacity;
-    T *m_elements;
-
-private:
-    void resize();
+    int *arr;
+    int size;
+    int capacity;
 
 public:
-    // ctors
-    Vector();
-    Vector(std::size_t cap);
-    Vector(const Vector<T> &);
-    Vector<T> &operator=(const Vector<T> &other);
-    ~Vector();
-
-    // operators
-    T &operator[](std::size_t index);
-    const T &operator[](std::size_t index) const;
-
-    // operations
-    void push_back(T);
-    bool empty() const;
-
-    T pop_back();
-
-    void insertAt(std::size_t index, T value);
-
-    void deleteAt(std::size_t index);
-
-    T &at(std::size_t pos);
-    const T &at(std::size_t pos) const;
-
-    T *data();
-    const T *data() const;
-
-    std::size_t size() const;
-    std::size_t capacity() const;
-
-    void reserve(std::size_t new_cap);
-
-    T &front();
-    const T &front() const;
-
-    T &back();
-    const T &back() const;
+    Vector() : size(0), capacity(1)
+    {
+        this->arr = new int[capacity];
+    }
+    Vector(int capacity) : size(0), capacity(capacity)
+    {
+        this->arr = new int[capacity];
+    }
+    ~Vector()
+    {
+        delete[] this->arr;
+    }
+    void resize(void)
+    {
+        this->capacity *= 2;
+        int *temp = new int[this->capacity];
+        for (int i = 0; i < this->size; i++)
+        {
+            temp[i] = this->arr[i];
+        }
+        delete[] this->arr;
+        this->arr = temp;
+    }
+    void push_back(int data)
+    {
+        if (this->size >= this->capacity)
+            resize();
+        this->arr[this->size] = data;
+        ++this->size;
+    }
+    int &operator[](int index)
+    {
+        if (index < 0 || index >= this->size)
+        {
+            throw std::out_of_range("Index out of range");
+        }
+        return arr[index];
+    }
+    void print(void) const
+    {
+        for (int i = 0; i < this->size; ++i)
+            std::cout << arr[i] << std::endl;
+    }
 };
-
-#include "Vector.tpp"
