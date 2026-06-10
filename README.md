@@ -52,10 +52,10 @@ For each topic:
 ## 📌 Topics Covered
 
 * [x] C++ Basics (Pointers, References, Dynamic Memory)
-* [ ] Arrays
+* [x] Arrays
 * [ ] Linked List
-* [ ] Stack
-* [ ] Queue
+* [x] Stack
+* [-] Queue
 * [ ] Hashing
 * [ ] Trees
 * [ ] Heap
@@ -68,15 +68,15 @@ For each topic:
 | Day | Topic          | Status        |
 | --- | -------------- | ------------- |
 | 1   | C++ Basics     | ✅ Completed   |
-| 2   | Arrays         | ⏳ In Progress |
-| 3   | Dynamic Array  | ⬜ Pending     |
-| 4   | Array Problems | ⬜ Pending     |
+| 2   | Arrays         | ✅ Completed   |
+| 3   | Stack          | ✅ Completed   |
+| 4   | Queue          | ⏳ In Progress |
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Language: C++
+* Language: C/C++
 * Compiler: g++
 * IDE: VS Code
 
