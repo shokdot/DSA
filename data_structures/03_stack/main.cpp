@@ -1,5 +1,5 @@
-#include "Static_Stack.hpp"
-#include "Dynamic_Stack.hpp"
+#include "StaticStack.hpp"
+#include "DynamicStack.hpp"
 #include <iostream>
 
 int main()
