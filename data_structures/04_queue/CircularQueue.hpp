@@ -22,6 +22,11 @@ public:
         return (rear + 1) % MAX_SIZE == front;
     }
 
+    int peek() const
+    {
+        return data[front];
+    }
+
     void enqueue(int element)
     {
         if (isFull())
