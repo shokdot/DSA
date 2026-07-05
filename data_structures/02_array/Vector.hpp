@@ -1,55 +1,76 @@
-#include <stdexcept>
 #include <iostream>
+#include <stdexcept>
 
 class Vector
 {
 private:
-    int *arr;
-    int size;
-    int capacity;
+    int *m_data;
+    int m_size;
+    int m_capacity;
+
+    bool isFull() const
+    {
+        return m_size >= m_capacity;
+    }
 
 public:
-    Vector() : size(0), capacity(1)
+    Vector() : m_size(0), m_capacity(1)
     {
-        this->arr = new int[capacity];
+        this->m_data = new int[m_capacity];
     }
-    Vector(int capacity) : size(0), capacity(capacity)
+
+    Vector(int capacity) : m_size(0), m_capacity(capacity)
     {
-        this->arr = new int[capacity];
+        if (m_capacity <= 0)
+            throw std::invalid_argument("Can't be capacity negative");
+
+        this->m_data = new int[m_capacity];
     }
+
     ~Vector()
     {
-        delete[] this->arr;
+        delete[] this->m_data;
     }
+
     void resize(void)
     {
-        this->capacity *= 2;
-        int *temp = new int[this->capacity];
-        for (int i = 0; i < this->size; i++)
+        this->m_capacity *= 2;
+        int *temp = new int[this->m_capacity];
+
+        for (int i = 0; i < this->m_size; i++)
         {
-            temp[i] = this->arr[i];
+            temp[i] = this->m_data[i];
         }
-        delete[] this->arr;
-        this->arr = temp;
+
+        delete[] this->m_data;
+        this->m_data = temp;
     }
-    void push_back(int data)
+
+    void push_back(int element)
     {
-        if (this->size >= this->capacity)
+        if (isFull())
             resize();
-        this->arr[this->size] = data;
-        ++this->size;
+
+        this->m_data[this->m_size++] = element;
     }
+
     int &operator[](int index)
     {
-        if (index < 0 || index >= this->size)
+        if (index < 0 || index >= this->m_size)
         {
             throw std::out_of_range("Index out of range");
         }
-        return arr[index];
+        return m_data[index];
     }
+
+    int size()
+    {
+        return m_size;
+    }
+
     void print(void) const
     {
-        for (int i = 0; i < this->size; ++i)
-            std::cout << arr[i] << std::endl;
+        for (int i = 0; i < this->m_size; ++i)
+            std::cout << this->m_data[i] << std::endl;
     }
 };
